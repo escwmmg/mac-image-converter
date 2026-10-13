@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+<key>CFBundleExecutable</key><string>ImageConverter</string>
+<key>CFBundleIdentifier</key><string>local.imageconverter.menubar</string>
+<key>CFBundleName</key><string>Image Converter</string>
+<key>CFBundleDisplayName</key><string>Image Converter</string>
+<key>CFBundlePackageType</key><string>APPL</string>
+<key>CFBundleVersion</key><string>2</string>
+<key>CFBundleShortVersionString</key><string>1.1</string>
+<key>LSMinimumSystemVersion</key><string>13.0</string>
+<key>LSUIElement</key><true/>
+<key>NSHighResolutionCapable</key><true/>
+<key>CFBundleDocumentTypes</key><array><dict>
+<key>CFBundleTypeName</key><string>Images</string>
+<key>CFBundleTypeRole</key><string>Viewer</string>
+<key>LSHandlerRank</key><string>Alternate</string>
+<key>LSItemContentTypes</key><array><string>public.image</string></array>
+</dict></array>
+<key>NSServices</key><array><dict>
+<key>NSMenuItem</key><dict><key>default</key><string>Convert Images</string></dict>
+<key>NSMessage</key><string>convertImages</string>
+<key>NSPortName</key><string>Image Converter</string>
+<key>NSSendTypes</key><array><string>public.file-url</string><string>NSFilenamesPboardType</string></array>
+<key>NSRequiredContext</key><dict><key>NSApplicationIdentifier</key><string>com.apple.finder</string></dict>
+</dict></array>
+</dict></plist>
