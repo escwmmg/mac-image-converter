@@ -11,7 +11,12 @@ final class Converter {
     private var cancelled = false
 
     static func findFFmpeg() -> URL? {
-        let paths = ["/opt/homebrew/bin/ffmpeg", "/usr/local/bin/ffmpeg"] +
+        let paths = [
+            "/opt/homebrew/opt/ffmpeg-full/bin/ffmpeg",
+            "/usr/local/opt/ffmpeg-full/bin/ffmpeg",
+            "/opt/homebrew/bin/ffmpeg",
+            "/usr/local/bin/ffmpeg"
+        ] +
             (ProcessInfo.processInfo.environment["PATH"] ?? "").split(separator: ":").map { "\($0)/ffmpeg" }
         return paths.first(where: { FileManager.default.isExecutableFile(atPath: $0) }).map { URL(fileURLWithPath: $0) }
     }
@@ -76,6 +81,9 @@ final class Converter {
         if isCancelled { throw ConversionFailure(message: "Cancelled") }
         guard task.terminationStatus == 0 else {
             let detail = String(data: errorData, encoding: .utf8) ?? "FFmpeg failed."
+            if format == .webp && detail.contains("Unknown encoder") {
+                throw ConversionFailure(message: "This FFmpeg build does not include WebP encoding. Install it with brew install ffmpeg-full, then retry the image.")
+            }
             throw ConversionFailure(message: String(detail.suffix(3000)))
         }
         let stem = input.deletingPathExtension().lastPathComponent

@@ -6,7 +6,7 @@ Requires an Apple Silicon Mac with macOS 13 or later and FFmpeg. Building from s
 
 ## Install
 
-1. Install [Homebrew](https://brew.sh), then run `brew install ffmpeg`. The app displays instructions if FFmpeg is missing.
+1. Install [Homebrew](https://brew.sh), then run `brew install ffmpeg-full`. This build includes WebP encoding. Existing FFmpeg installations also work if they include the required encoders.
 2. Run `./install.command` from the project folder, or double-click it in Finder. It builds the app if needed, installs it in `~/Applications`, installs the Finder Quick Action in `~/Library/Services`, and opens the app. No administrator password is required. Run `xcode-select --install` first if the Command Line Tools are missing.
 3. Click the image icon at the top right of the menu bar, or press **Control–Option–Command–I** while the app is running.
 
@@ -44,8 +44,8 @@ JPEG quality is mapped to FFmpeg's quantizer range; it is not a target file size
 
 ## Details and limitations
 
-- FFmpeg is detected at `/opt/homebrew/bin/ffmpeg`, `/usr/local/bin/ffmpeg`, then the app's inherited PATH. Apps launched from Finder may have a shorter PATH than Terminal.
-- WebP requires FFmpeg's `libwebp` encoder, included in the tested Homebrew build. Missing encoders and unsupported inputs appear as per-file errors.
+- FFmpeg is detected in Homebrew's `opt/ffmpeg-full/bin` directories first, then `/opt/homebrew/bin/ffmpeg`, `/usr/local/bin/ffmpeg`, and the app's inherited PATH. Apps launched from Finder may have a shorter PATH than Terminal.
+- WebP requires FFmpeg's `libwebp` encoder. Recent Homebrew installations need [ffmpeg-full](https://formulae.brew.sh/formula/ffmpeg-full) for this encoder; the standard formula may omit it. Missing encoders and unsupported inputs appear as per-file errors.
 - Animated and multipage inputs convert their **first frame/page only**. Metadata, ICC profiles, and HDR appearance may not be preserved. JPEG/BMP do not retain transparency.
 - Output folders must be writable and support hard links (the standard APFS Mac filesystem does). For a volume that does not support hard links, save to a local folder and then copy the result to that volume.
 - The global shortcut requires the app to be running. If another app has reserved it, the converter reports that it is unavailable; the menu bar still works.

@@ -11,9 +11,9 @@ jobs:
   macos:
     runs-on: macos-14
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Install FFmpeg
-        run: brew install ffmpeg
+        run: brew install ffmpeg-full
       - name: Test conversions and queue behavior
         run: ./test.command
       - name: Build app

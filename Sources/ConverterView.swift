@@ -43,7 +43,7 @@ struct ConverterView: View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Install FFmpeg with Homebrew to convert images.")
             HStack {
-                Text("brew install ffmpeg").textSelection(.enabled)
+                Text("brew install ffmpeg-full").textSelection(.enabled)
                 Spacer()
                 Button("Check Again") { model.refreshFFmpeg() }
             }
